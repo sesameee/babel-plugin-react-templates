@@ -21,8 +21,8 @@ function fnCompiledTemplate(node_path, plugin, opts){
     rt_options = Object.assign(DEFAULT_RT_OPTIONS, plugin.opts),
     source = fs.readFileSync(absolute_path, {encoding: 'utf8'}),
     compiled_template = reactTemplates.convertTemplateToReact(source, rt_options),
-    compiled_filename = '_' + path.basename(opts.relative_path).replace(opts.reg_ext, '.rt.js'),
-    compiled_path = path.resolve(base_path, compiled_filename);
+    compiled_filename = '_' + path.basename(absolute_path).replace(opts.reg_ext, '.rt.js'),
+    compiled_path = absolute_path.substring(0, absolute_path.lastIndexOf("/")) + '/' + compiled_filename;
   fs.writeFileSync(compiled_path, compiled_template, 'utf8');
   return compiled_path
 }
